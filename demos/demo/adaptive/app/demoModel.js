@@ -59,6 +59,11 @@ export class DemoModel extends AbstractModel {
   init() {
     super.init();
     this.desktopEntity.bkColor = this.colors.background;
+    // the flash clock (app.stack.flashState): the blinking cursor of
+    // InputEntity reads it, and the model has to keep it going like every
+    // game does — nothing in the library ticks it
+    this.app.stack.flashState = false;
+    this.sendEvent(330, {id: 'changeFlashState'});
     // nothing is placed here: the desktop has no size until the first
     // resizeModel, and every resize lays the screen out afresh
   } // init
@@ -119,7 +124,7 @@ export class DemoModel extends AbstractModel {
       bx += b.label.length*cw+cw;
     });
     d.addEntity(new TextEntity(d, mono, right, rightTop+ch+4, 6*cw, ch, 'INPUT', c.dim, false, {}));
-    d.addEntity(new InputEntity(d, mono, right+6*cw, rightTop+ch+4, Math.min(24*cw, w-right-6*cw-margin), ch, 'demo', this.inputValue, c.accent, c.input, 24, {}));
+    d.addEntity(new InputEntity(d, mono, right+6*cw, rightTop+ch+4, Math.min(24*cw, w-right-6*cw-margin), ch, 'demo', this.inputValue, c.accent, c.input, 24, {cursorChar: '█'}));
 
     // the console: everything below, scrolling
     var consoleTop = Math.max(top+this.menu.length*ch, rightTop+2*ch+4)+12;
@@ -219,6 +224,10 @@ export class DemoModel extends AbstractModel {
         return true;
       case 'changeInputValue':
         this.println('input: '+this.inputValue);
+        return true;
+      case 'changeFlashState':
+        this.app.stack.flashState = !this.app.stack.flashState;
+        this.sendEvent(330, {id: 'changeFlashState'});
         return true;
       case 'keyPress':
         if (event.key == 'Escape') {
