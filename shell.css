@@ -1,0 +1,214 @@
+/* The shell of the svision tutorial: a top bar, the list of demos on the left,
+   the demo in an iframe on the right. Below 900px the list slides in over
+   the content from the menu button. Dark, as the demos are. */
+
+:root {
+  --top: 48px;
+  --sidebar: 260px;
+  --bg: #15171c;
+  --bg-sidebar: #1c1f26;
+  --bg-top: #22252e;
+  --line: #2e323c;
+  --text: #e6e8ee;
+  --muted: #9aa0ae;
+  --accent: #4fd1ff;
+  --selected: #1d6fa5;   /* the blue bar of the chosen topic */
+  --selected-platform: #c0392b;   /* the red of the chosen platform */
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  display: grid;
+  grid-template-rows: var(--top) 1fr;
+  grid-template-columns: var(--sidebar) 1fr;
+  grid-template-areas:
+    "top top"
+    "side main";
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* ---- top bar */
+.top {
+  grid-area: top;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  background: var(--bg-top);
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.current {
+  color: var(--text);   /* the heading: topic and platform, as the brand */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.current:not(:empty)::before { content: "— "; }
+.menu-button {
+  display: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.menu-button:hover { background: var(--line); }
+
+/* ---- sidebar: the topics, then the platform bar */
+.sidebar {
+  grid-area: side;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--line);
+  padding: 8px 0;
+}
+
+.demo-list {
+  flex: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.demo-list a {
+  display: block;
+  padding: 8px 16px;
+  color: var(--text);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+}
+.demo-list a:hover { background: var(--line); }
+.demo-list a.active {
+  border-left-color: var(--accent);
+  background: var(--selected);
+  color: #fff;
+}
+.demo-list a.active .platform { color: #cfe9f7; }
+.demo-list .title { display: block; }
+.demo-list .platform {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 16px 12px 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.platforms button {
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.platforms button:hover { background: var(--line); }
+.platforms button.active {
+  background: var(--selected-platform);
+  border-color: var(--selected-platform);
+  color: #fff;
+}
+.platforms button[hidden] { display: none; }
+.backdrop { display: none; }
+
+/* ---- content */
+.content {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.info {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.blurb {
+  margin: 0;
+  flex: 1;
+  color: #8a909c;   /* the description grey, under the heading in the top bar */
+}
+.open {
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.open:hover { text-decoration: underline; }
+.frame {
+  flex: 1;
+  min-height: 0;
+  background: #000;
+}
+.frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+
+/* ---- narrow screens: the list behind the menu button */
+@media (max-width: 900px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "top"
+      "main";
+  }
+  .menu-button { display: inline-flex; align-items: center; justify-content: center; }
+  .sidebar {
+    position: fixed;
+    top: var(--top);
+    bottom: 0;
+    left: 0;
+    width: min(var(--sidebar), 85vw);
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    z-index: 20;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
+  }
+  body.menu-open .sidebar { transform: translateX(0); }
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: var(--top) 0 0 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+  }
+  body.menu-open .backdrop { opacity: 1; pointer-events: auto; }
+  .info { flex-wrap: wrap; gap: 4px 16px; }
+}

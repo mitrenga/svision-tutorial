@@ -1,0 +1,7 @@
+CHAT.md
+.claude/
+demos/*/*/config/config.php
+demos/*/*/js/
+demos/*/*/build/
+node_modules/
+*.log
