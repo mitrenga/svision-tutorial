@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" rx="120" fill="#1a1a1a"/>
+  <!-- the bezel and the portrait raster -->
+  <rect x="312" y="96" width="400" height="832" rx="24" fill="#000000" stroke="#3a3a3a" stroke-width="12"/>
+  <rect x="344" y="128" width="336" height="768" fill="#0a0a0a"/>
+  <!-- the cellophane bands -->
+  <rect x="344" y="200" width="336" height="96" fill="#ff2020" opacity="0.85"/>
+  <rect x="344" y="704" width="336" height="144" fill="#20ff20" opacity="0.85"/>
+  <!-- the picture under them -->
+  <g fill="#ffffff">
+    <rect x="392" y="224" width="48" height="48"/><rect x="488" y="224" width="48" height="48"/><rect x="584" y="224" width="48" height="48"/>
+    <rect x="392" y="360" width="48" height="24"/><rect x="488" y="360" width="48" height="24"/><rect x="584" y="360" width="48" height="24"/>
+    <rect x="392" y="440" width="48" height="24"/><rect x="488" y="440" width="48" height="24"/><rect x="584" y="440" width="48" height="24"/>
+    <rect x="504" y="520" width="16" height="80"/>
+    <rect x="464" y="760" width="96" height="48"/>
+  </g>
+</svg>

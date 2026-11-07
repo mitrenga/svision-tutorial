@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" rx="120" fill="#10181f"/>
+  <!-- the grid -->
+  <g stroke="#2a4050" stroke-width="6">
+    <path d="M128 0V1024M256 0V1024M384 0V1024M512 0V1024M640 0V1024M768 0V1024M896 0V1024"/>
+    <path d="M0 128H1024M0 256H1024M0 384H1024M0 512H1024M0 640H1024M0 768H1024M0 896H1024"/>
+  </g>
+  <!-- two desktops, a narrow and a wide one, same cell size -->
+  <rect x="192" y="192" width="256" height="640" fill="none" stroke="#3f8fbf" stroke-width="20"/>
+  <rect x="512" y="320" width="384" height="256" fill="none" stroke="#ffd060" stroke-width="20"/>
+  <!-- the arrows of the resize -->
+  <g stroke="#c8d8e0" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M560 880H920M880 840L920 880L880 920"/>
+    <path d="M560 880L600 840M560 880L600 920"/>
+  </g>
+</svg>

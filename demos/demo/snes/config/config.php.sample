@@ -1,0 +1,4 @@
+<?php
+
+  // the demo runs locally: the browser loads app/ directly, nothing is built
+  $devMode = true;

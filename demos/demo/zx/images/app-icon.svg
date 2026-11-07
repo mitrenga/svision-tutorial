@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" rx="120" fill="#000000"/>
+  <!-- the four stripes of the Spectrum's case -->
+  <polygon points="560,1024 700,640 820,640 680,1024" fill="#b6391e"/>
+  <polygon points="680,1024 820,640 940,640 800,1024" fill="#dcb533"/>
+  <polygon points="800,1024 940,640 1024,640 1024,1024" fill="#41a329"/>
+  <polygon points="920,1024 1024,740 1024,1024" fill="#4cb7a7"/>
+  <!-- eight attribute cells, ink on paper -->
+  <g>
+    <rect x="112" y="112" width="180" height="180" fill="#1435b2"/><rect x="152" y="152" width="100" height="100" fill="#ffe15a"/>
+    <rect x="312" y="112" width="180" height="180" fill="#b6391e"/><rect x="352" y="152" width="100" height="100" fill="#4ddcfc"/>
+    <rect x="512" y="112" width="180" height="180" fill="#b442b4"/><rect x="552" y="152" width="100" height="100" fill="#53d734"/>
+    <rect x="712" y="112" width="180" height="180" fill="#41a329"/><rect x="752" y="152" width="100" height="100" fill="#fb6ee9"/>
+    <rect x="112" y="312" width="180" height="180" fill="#4cb7a7"/><rect x="152" y="352" width="100" height="100" fill="#000000"/>
+    <rect x="312" y="312" width="180" height="180" fill="#dcb533"/><rect x="352" y="352" width="100" height="100" fill="#1e48f7"/>
+    <rect x="512" y="312" width="180" height="180" fill="#b8b8b8"/><rect x="552" y="352" width="100" height="100" fill="#fc3b34"/>
+    <rect x="712" y="312" width="180" height="180" fill="#000000"/><rect x="752" y="352" width="100" height="100" fill="#ffffff"/>
+  </g>
+</svg>

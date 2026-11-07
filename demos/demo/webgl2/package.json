@@ -1,0 +1,6 @@
+{
+  "name": "webgl2demo",
+  "private": true,
+  "type": "module",
+  "description": "Marks the repository's .js files as ES modules so the offline tools can import the shared app modules directly. No dependencies, no build step - the app itself is built by svtool."
+}

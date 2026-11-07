@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" rx="160" fill="#0c1830"/>
+  <!-- an isometric cube: three faces, lit from the top left -->
+  <polygon points="512,208 800,368 512,528 224,368" fill="#e8e8f0"/>
+  <polygon points="224,368 512,528 512,848 224,688" fill="#5070c0"/>
+  <polygon points="800,368 512,528 512,848 800,688" fill="#2c4080"/>
+  <path d="M512,208 L800,368 L512,528 L224,368 Z M512,528 L512,848 M224,368 L224,688 L512,848 L800,688 L800,368" fill="none" stroke="#40ff40" stroke-width="10" stroke-linejoin="round"/>
+</svg>

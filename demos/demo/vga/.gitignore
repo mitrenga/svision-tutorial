@@ -1,0 +1,11 @@
+build/
+tools/vendor/
+node_modules/
+config/config.php
+__pycache__/
+*.pyc
+js
+CLAUDE.md
+.claude/
+MILNIKY.md
+ZADANI.md
