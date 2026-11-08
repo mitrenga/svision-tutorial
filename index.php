@@ -94,7 +94,7 @@ $shellJSON = json_encode(['platforms' => $platforms, 'topics' => $topics, 'topic
       <a class="open" id="openLink" href="#" target="_blank" rel="noopener">Open on its own ↗</a>
     </div>
     <div class="frame">
-      <iframe id="demoFrame" title="Demo" allow="autoplay; gamepad; fullscreen" src="demos/<?= $topicId ?>/<?= $platformId ?>/"></iframe>
+      <iframe id="demoFrame" title="Demo" allow="gamepad; fullscreen" src="demos/<?= $topicId ?>/<?= $platformId ?>/"></iframe>
     </div>
   </main>
 
