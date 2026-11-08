@@ -5,3 +5,4 @@ demos/*/*/js/
 demos/*/*/build/
 node_modules/
 *.log
+CLAUDE.md
