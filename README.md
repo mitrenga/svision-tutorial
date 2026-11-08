@@ -13,9 +13,9 @@ topic changes and is remembered in the browser. On a narrow screen the list
 hides behind the menu button. `?demo=<topic>&platform=<platform>` picks a demo
 so a link can be shared.
 
-Topics: `helloworld` (all nine platforms), `demo` (the former zxdemo,
+Topics: `helloworld` (all ten platforms), `demo` (the former zxdemo,
 c64demo, atari8demo, vgademo, snesdemo, arcadedemo, vectordemo, webgl2demo and
-adaptivedemo as its nine platforms).
+adaptivedemo, plus a terminal demo written here, as its ten platforms).
 
 ## Running
 

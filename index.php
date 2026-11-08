@@ -17,6 +17,7 @@ $platforms = [
   'c64'      => 'Commodore 64',
   'atari8'   => 'Atari 8-bit',
   'vga'      => 'VGA',
+  'terminal' => 'Terminal',
   'snes'     => 'Super Nintendo',
   'arcade'   => 'Arcade',
   'vector'   => 'Vector',
@@ -27,7 +28,7 @@ $platforms = [
 $topics = [
   ['id' => 'helloworld', 'title' => 'Hello world',
    'blurb' => 'The smallest possible svision application: one platform, one model, one text entity in the machine\'s font. The skeleton every project starts from.',
-   'platforms' => ['zx', 'c64', 'atari8', 'vga', 'snes', 'arcade', 'vector', 'webgl2', 'adaptive']],
+   'platforms' => ['zx', 'c64', 'atari8', 'vga', 'terminal', 'snes', 'arcade', 'vector', 'webgl2', 'adaptive']],
   ['id' => 'demo', 'title' => 'Demo',
    'blurb' => 'The whole layer of one platform on a single screen — not a game, a place to see what the platform can do.',
    'blurbs' => [
@@ -35,13 +36,14 @@ $topics = [
      'c64'      => 'The Commodore 64 layer: the text screen with screen codes and Color RAM, the Char ROM, the border, hardware sprites and the SID.',
      'atari8'   => 'The Atari 400/800/XL/XE layer: the ANTIC display list over 64 KB, GTIA colours of a PAL 800XL, player/missile graphics.',
      'vga'      => 'The VGA layer of the DOS remakes: mode 13h video RAM, the 256-colour palette, the 4:3 picture, samples.',
+     'terminal' => 'The terminal platform on the 15IE-00-013 of Tetris 1984, a VT52 on a serial line at 9600 baud — the host sends bytes, the firmware draws them; KOI-7 Latin and Cyrillic, cursor addressing, tabs, the bell, the status line and the keyboard with the host\'s echo.',
      'snes'     => 'The Super Nintendo layer: the PPU in mode 1 over VRAM, CGRAM and OAM, sprites with the per-line limits, brightness inside the frame.',
      'arcade'   => 'The raster arcade layer: scaling, the bezel, the colour overlay and the display styles of the cabinet.',
      'vector'   => 'The vector (SVG) platform: a display list of lines with beam intensity, the test picture, the vector fonts — the ground of Asteroids and Battlezone.',
      'webgl2'   => 'The 3D platform: a scene without DOM rendered by WebGL2 — lit cube, sphere and cylinder over a grid, with a 2D overlay.',
      'adaptive' => 'The platform of the library\'s own games: the logical desktop follows the window instead of a fixed machine screen.',
    ],
-   'platforms' => ['zx', 'c64', 'atari8', 'vga', 'snes', 'arcade', 'vector', 'webgl2', 'adaptive']],
+   'platforms' => ['zx', 'c64', 'atari8', 'vga', 'terminal', 'snes', 'arcade', 'vector', 'webgl2', 'adaptive']],
 ];
 
 $topicIds = array_column($topics, 'id');
@@ -56,7 +58,7 @@ $shellJSON = json_encode(['platforms' => $platforms, 'topics' => $topics, 'topic
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>svision tutorial</title>
-  <meta name="description" content="Demos of the svision library, each on the platforms it supports: ZX Spectrum, Commodore 64, Atari 8-bit, VGA, Super Nintendo, arcade, vector, 3D and adaptive.">
+  <meta name="description" content="Demos of the svision library, each on the platforms it supports: ZX Spectrum, Commodore 64, Atari 8-bit, VGA, a serial terminal, Super Nintendo, arcade, vector, 3D and adaptive.">
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="shell.css">
 </head>
