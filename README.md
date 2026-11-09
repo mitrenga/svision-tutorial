@@ -33,10 +33,13 @@ to `blurbs`.
 
 ## Server
 
-On the development server the project has a host of its own, `nginx/tutorial.shipard.pro`
-(`https://tutorial.shipard.pro:34444/`): the shared `willy2.shipard.pro` rewrites only
-`/<project>/...`, and the demos sit one level deeper. The file documents the DNS record and
-the install.
+The project needs a host of its own: the demos sit two levels deep
+(`/demos/<topic>/<platform>/`) and each is an application with its own rewrite to
+`index.php`. Two nginx configurations are in `nginx/`:
+
+- `tutorial.sampledev.com` — a sample for a development server; the header lists what to
+  replace (host name, checkout path, certificate, PHP-FPM socket) and how to install it.
+- `tutorial.svision.place` — the production server, `https://tutorial.svision.place/`.
 
 ## Licence
 

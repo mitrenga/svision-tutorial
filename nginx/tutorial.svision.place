@@ -1,32 +1,38 @@
-# tutorial.shipard.pro:34444 – the svision tutorial and demos (/home/libmit/sw/svision-tutorial) on a
-# host of their own: the shell at /, every demo at /demos/<topic>/<platform>/ — two
-# levels deeper than the projects of willy2.shipard.pro, whose rewrite knows only
-# /<project>/.... Same certificate (*.shipard.pro), same port, same PHP-FPM.
+# tutorial.svision.place – the svision tutorial and demos on a host of their own:
+# the shell at /, every demo at /demos/<topic>/<platform>/ — two levels deeper
 #
-#   https://tutorial.shipard.pro:34444/                    the shell (?demo=<name>)
-#   https://tutorial.shipard.pro:34444/demos/helloworld/zx/   a demo on its own
+#   https://tutorial.svision.place/                       the shell (?demo=<name>)
+#   https://tutorial.svision.place/demos/helloworld/zx/   a demo on its own
 #
-# DNS: an A record tutorial.shipard.pro -> 178.20.137.88 (as willy2).
-# Install:  sudo cp /home/libmit/sw/svision-tutorial/nginx/tutorial.shipard.pro /etc/nginx/sites-enabled/
-#           sudo nginx -t && sudo systemctl reload nginx
+# The production server. IPv6 reaches it directly; IPv4 goes through the reverse
+# proxy, which needs a host of the same name passing the Host header on.
 
 server {
-	listen 34444 ssl http2;
+	listen 80;
+	listen [::]:80;
+	server_name tutorial.svision.place;
+	location / {
+		return 301 https://tutorial.svision.place$request_uri;
+	}
+}
 
-	server_name tutorial.shipard.pro;
+server {
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
 
-	root /home/libmit/sw/svision-tutorial;
+	server_name tutorial.svision.place;
+
+	root /var/lib/rg/svision-tutorial;
 	index index.php;
 
-	ssl_certificate /var/lib/certs/all.shipard.pro/chain.pem;
-	ssl_certificate_key /var/lib/certs/all.shipard.pro/privkey.pem;
-	ssl_trusted_certificate /var/lib/certs/all.shipard.pro/chain.pem;
+	ssl_certificate /var/lib/shipard/data-sources/7ej2-2jx1-7ybc-frbh/config/nginx/certs/all.svision.place/chain.pem;
+	ssl_certificate_key /var/lib/shipard/data-sources/7ej2-2jx1-7ybc-frbh/config/nginx/certs/all.svision.place/privkey.pem;
+	ssl_trusted_certificate /var/lib/shipard/data-sources/7ej2-2jx1-7ybc-frbh/config/nginx/certs/all.svision.place/chain.pem;
 	ssl_session_timeout 60m;
 	ssl_session_cache shared:SSL:50m;
 	ssl_protocols TLSv1.2 TLSv1.3;
+	ssl_ciphers 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!3DES:!MD5:!PSK';
 	ssl_prefer_server_ciphers on;
-	ssl_stapling on;
-	ssl_stapling_verify on;
 	add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload" always;
 
 	# ---------------------------------------------------------------
