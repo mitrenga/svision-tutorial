@@ -165,10 +165,20 @@ body {
   white-space: nowrap;
 }
 .open:hover { text-decoration: underline; }
+/* Until the demo has drawn, its place shows a dotted grid, as dotted graph
+   paper: round dots a little over half the pitch wide, in the shell's dark
+   colours. The shell hides the iframe while it waits (shell.js) — the demo's
+   own page is black from its first style sheet. */
 .frame {
+  --dot-pitch: 16px;
+  --dot-radius: 4.5px;
+  --dot: #3a3f4b;
   flex: 1;
   min-height: 0;
-  background: #000;
+  background-color: var(--bg-sidebar);
+  background-image: radial-gradient(circle at center,
+    var(--dot) calc(var(--dot-radius) - 0.5px), transparent var(--dot-radius));
+  background-size: var(--dot-pitch) var(--dot-pitch);
 }
 .frame iframe {
   display: block;
@@ -176,6 +186,11 @@ body {
   height: 100%;
   border: 0;
   background: #000;
+  transition: opacity 0.25s ease;
+}
+.frame iframe.waiting {
+  opacity: 0;
+  transition: none;
 }
 
 /* ---- narrow screens: the list behind the menu button */

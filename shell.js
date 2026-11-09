@@ -45,11 +45,41 @@
     return topic.platforms[0];
   }
 
+  var WAIT_LIMIT = 8000;   // ms; a demo that never draws is shown anyway, with whatever it says
+  var waiting = 0;         // the number of the current wait; a newer one cancels the older
+
+  function frameDocument() {
+    try { return frame.contentDocument; } catch (e) { return null; }
+  }
+
+  /** hide the iframe — the linen of .frame shows — until the document that
+      replaces the present one has its canvas or svg, i.e. the demo has drawn */
+  function waitForDemo() {
+    var wait = ++waiting;
+    var previous = frameDocument();
+    var started = Date.now();
+    frame.classList.add('waiting');
+    function check() {
+      if (wait != waiting) {
+        return;
+      }
+      var doc = frameDocument();
+      var drawn = doc && doc !== previous && doc.body && doc.body.querySelector('canvas, svg');
+      if (drawn || Date.now()-started > WAIT_LIMIT) {
+        frame.classList.remove('waiting');
+        return;
+      }
+      requestAnimationFrame(check);
+    }
+    requestAnimationFrame(check);
+  }
+
   function show(topicId, platformId, pushState) {
     var topic = topicOf(topicId);
     var platform = platformFor(topic, platformId);
     var src = 'demos/'+topic.id+'/'+platform+'/';
     if (frame.getAttribute('src') != src) {
+      waitForDemo();
       frame.setAttribute('src', src);
     }
     blurb.textContent = (topic.blurbs && topic.blurbs[platform]) || topic.blurb;
