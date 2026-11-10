@@ -98,14 +98,36 @@ $shellJSON = json_encode(['platforms' => $platforms, 'topics' => $topics, 'topic
   <main class="content">
     <div class="info" id="info">
       <p class="blurb" id="blurb"></p>
-      <a class="open" id="openLink" href="#" target="_blank" rel="noopener">Open on its own ↗</a>
+      <button class="tool" id="sourceButton" type="button" aria-label="Source files" aria-haspopup="dialog" data-tip="Source files">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 5l-3 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <a class="tool" id="openLink" href="#" target="_blank" rel="noopener" aria-label="Open on its own" data-tip="Open on its own">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
     <div class="frame">
       <iframe id="demoFrame" title="Demo" allow="gamepad; fullscreen" src="demos/<?= $topicId ?>/<?= $platformId ?>/"></iframe>
     </div>
   </main>
 
+  <dialog class="sources" id="sourceDialog" aria-labelledby="sourceTitle">
+    <header class="sources-top">
+      <span class="sources-title" id="sourceTitle"></span>
+      <button class="tool" id="sourceClose" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </header>
+    <div class="sources-body">
+      <nav class="sources-tree" id="sourceTree" aria-label="Files"></nav>
+      <section class="sources-file">
+        <div class="sources-path" id="sourcePath"></div>
+        <div class="sources-view" id="sourceView" tabindex="0"></div>
+      </section>
+    </div>
+  </dialog>
+
   <script>window.shell = <?= $shellJSON ?>;</script>
+  <script src="sourceHighlight.js<?= $ver ?>"></script>
   <script src="shell.js<?= $ver ?>"></script>
 </body>
 </html>
