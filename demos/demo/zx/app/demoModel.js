@@ -142,7 +142,8 @@ export class DemoModel extends AbstractModel {
     }
 
     // the character set of the ROM, 15 a row
-    var chars = this.app.fonts.zxFonts8x8Mono.fontsChars;
+    var font = this.app.fonts.zxFonts8x8Mono;
+    var chars = font.fontsChars.substring(0, font.baseCharsCount);
     for (var c = 0; c < chars.length; c++) {
       this.writeText(2+Math.floor(c/15), 17+(c%15), chars[c], black);
     }
