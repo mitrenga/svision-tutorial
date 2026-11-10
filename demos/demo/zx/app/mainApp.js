@@ -36,15 +36,6 @@ export class MainApp extends AbstractApp {
       fonts5x5: new Fonts5x5(this),
       fonts3x3: new Fonts3x3(this)
     };
-    // the glyphs the dialogs of the library use beyond ASCII
-    this.fonts.fonts5x5.addGlyphs({
-      '←': {width: 6, data: [[0,2,6,1], [1,1,1,3], [2,0,1,5]]},
-      '↓': {width: 5, data: [[2,0,1,5], [1,3,3,1], [0,2,5,1]]},
-      '↑': {width: 5, data: [[2,0,1,5], [1,1,3,1], [0,2,5,1]]},
-      '→': {width: 6, data: [[0,2,6,1], [4,1,1,3], [3,0,1,5]]},
-      '█': {width: 4, data: [[0,0,4,5]]}
-    });
-
     this.audioManager = new AudioManager(this);
     this.playerName = Tool.readCookie('playerName', '');
 
