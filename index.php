@@ -50,6 +50,13 @@ $topicIds = array_column($topics, 'id');
 $topicId = isset($_GET['demo']) && in_array($_GET['demo'], $topicIds, true) ? $_GET['demo'] : $topicIds[0];
 $topic = $topics[array_search($topicId, $topicIds, true)];
 $platformId = isset($_GET['platform']) && in_array($_GET['platform'], $topic['platforms'], true) ? $_GET['platform'] : $topic['platforms'][0];
+// The shell's version, from version.js as in the applications (svision reads
+// app/version.js the same way): it goes to the shell's own files as ?ver=, so
+// a browser holding them under the server's long expiry takes the new ones
+// once the version changes. The demos version their files themselves.
+$version = preg_match("/Version\s*=\s*'([^']+)'/", (string)@file_get_contents(__DIR__.'/version.js'), $m) ? $m[1] : 'unknown';
+$ver = '?ver='.rawurlencode($version);
+
 $shellJSON = json_encode(['platforms' => $platforms, 'topics' => $topics, 'topic' => $topicId, 'platform' => $platformId], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 ?>
 <!DOCTYPE html>
@@ -59,8 +66,8 @@ $shellJSON = json_encode(['platforms' => $platforms, 'topics' => $topics, 'topic
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>svision tutorial</title>
   <meta name="description" content="Demos of the svision library, each on the platforms it supports: ZX Spectrum, Commodore 64, Atari 8-bit, VGA, a serial terminal, Super Nintendo, arcade, vector, 3D and adaptive.">
-  <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="shell.css">
+  <link rel="icon" href="favicon.ico<?= $ver ?>">
+  <link rel="stylesheet" href="shell.css<?= $ver ?>">
 </head>
 <body>
   <header class="top">
@@ -99,6 +106,6 @@ $shellJSON = json_encode(['platforms' => $platforms, 'topics' => $topics, 'topic
   </main>
 
   <script>window.shell = <?= $shellJSON ?>;</script>
-  <script src="shell.js"></script>
+  <script src="shell.js<?= $ver ?>"></script>
 </body>
 </html>
